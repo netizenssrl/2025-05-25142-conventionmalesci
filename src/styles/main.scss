@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --navbar-height: 6rem;
+}
+html {
+    main{
+        @apply bg-gray-100;
+        min-height: calc(100dvh - var(--navbar-height));
+    }
+    &.light{
+        .select-white{
+            .bg-default-100{
+                @apply bg-white;
+            }
+        }
+    }
+    &.dark{
+        main{
+            @apply bg-gray-950;
+        }
+    }
+}
+
+.site-navbar {
+    ul {
+        li {
+            @apply  flex relative h-full items-center;
+            @apply  data-[active=true]:after:content-[''] 
+                    data-[active=true]:after:absolute 
+                    data-[active=true]:after:bottom-0 
+                    data-[active=true]:after:left-0 
+                    data-[active=true]:after:right-0 
+                    data-[active=true]:after:h-[2px]
+                    data-[active=true]:after:bg-foreground;
+            &[data-active="true"]{
+                svg{
+                    stroke-width: 2px;
+                }
+            }
+            
+            
+        }
+    }
+}
+.shadow-small{
+    @apply shadow-sm;
+}
+.votingSessionsTable{
+    @apply rounded-none -mx-2 w-auto;
+    .shadow-small{
+        @apply shadow-none p-2;
+    }
+}
+.participantsTabsCounter, .commandsTabsPanel{
+    >div{
+        @apply bg-background shadow-sm;
+    }
+    button{
+        @apply py-5;
+        >div{
+            @apply px-4;
+        }
+        
+    }
+}
+.commandsTabsPanel{
+    + div{
+        @apply px-0 pb-0 flex-1;
+    }
+}
+.btn-question{
+    @apply min-w-24;
+}

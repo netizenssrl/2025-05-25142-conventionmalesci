@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="theme-color" content="#19233e">
+        <meta name="apple-mobile-web-app-title" content="Connessi al futuro">
+        <link rel="stylesheet" href="assets/fonts/fonts.css">
+        <link rel="stylesheet" href="assets/css/participant/participant.min.css">
+        <script src="assets/js/socket.io.min.js"></script>
+        <script src="assets/js/easytimer.min.js"></script>
+        <script src="assets/js/jquery-3.7.1.min.js"></script>
+        <script src="assets/js/axios/axios.min.js"></script>
+        <script src="assets/js/participant.js"></script>
+        
+        <title>Malesci 2025</title>
+    </head>
+    <body>
+        <header class="flex items-center justify-end">
+            <div class="profile-menu-container">
+                <p class="profile-email"></p>
+                <button id="profile-btn"></button>
+                <p id="logout-btn">Logout</p>
+            </div>
+        </header>
+        <div class="container">
+            <div class="logo-box">
+                <img src="assets/img/participant/main-logo.png" class="main-logo" alt="Malesci 2025" />
+                <p class="text-logo">FIRENZE, 20 MAGGIO 2025</p>
+            </div>
+        </div>
+        <main>
+            <section class="app-section pt-4" id="login-section">
+                <div class="container flex-1">
+                    <div class="flex h-full items-center flex-col justify-center">
+                        <div class="mb-10 w-full">
+                            <div class="bg-primary rounded-lg">
+                                <p class="text-white font-eurostile font-bold text-[3vw] lg:text-2xl py-3 text-center">INSERISCI IL TUO INDIRIZZO EMAIL AZIENDALE</p>
+                                <input class="bg-white rounded-lg leading-[3] w-full text-center outline-none" type="email" id="email-login" />
+                            </div>
+                            <p class="error-text login-error text-center mt-2"></p>
+                        </div>
+                       
+                        <button class="btn-primary" id="btn-login">ACCEDI</button>
+                    </div>
+                </div>
+            </section>
+            <section class="app-section" id="home-section">
+                <div class="container flex-1">
+                    <div class="flex h-full items-center flex-col justify-center">
+                        <button class="btn-primary mb-12" id="btn-open-programma">PROGRAMMA</button>
+                        <button class="btn-secondary disabled" id="btn-open-tweets"><span>Q&A</span></button>
+                    </div>
+                </div>
+                <div class="modal" id="modal-programma">
+                    <div class="flex w-full h-full items-center justify-center">
+                        <div class="modal-content">
+                            <div class="modal-scroller">
+                                <img src="assets/img/participant/updated-program.png" class="w-full h-auto" />
+                            </div>
+                            <button class="modal-close-btn"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal" id="modal-tweets">
+                    <div class="flex w-full h-full items-center justify-center">
+                        <div class="modal-content">
+                            <div class="bg-white h-full rounded-lg relative">
+                                <div class="tweets-container-outer" page="1">
+                                    <p class="text-secondary text-center font-eurostileDemi mb-2">DOMANDE INVIATE</p>
+                                    <div class="tweets-container mb-6"></div>
+                                    <div class="flex justify-center">
+                                        <button class="btn-primary" id="btn-open-new-tweet">NUOVA DOMANDA</button>
+                                    </div>
+                                </div>
+                                <div class="tweets-container-outer" page="2">
+                                    <button class="modal-back-btn">INDIETRO</button>
+                                    <p class="text-secondary text-center font-eurostileDemi mb-6">SCRIVI QUI LA TUA DOMANDA</p>
+                                    <div class="flex-1">
+                                        <textarea id="tweet-textarea" rows="8" maxlength="300"></textarea>
+                                    </div>
+                                    <div class="flex justify-center">
+                                        <button class="btn-primary disabled" id="btn-send-new-tweet">INVIA</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="modal-close-btn"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="app-section" id="question-section">
+                <div class="flex flex-col h-full">
+                    <div class="container">
+                        <div class="justify-center flex gap-2 mb-4">
+                            <div class="timer-box">
+                                <p>
+                                    <span class="minutes">00</span>.<span class="seconds">00</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qa-container">
+                        <div class="container">
+                            <div class="question-box-container flex flex-col mb-4">
+                                <p class="text-center question-text-number text-white font-eurostileEx2 font-bold"></p>
+                                <p class="text-center question-text text-white font-eurostileDemi leading-tight"></p>
+                            </div>
+                            <div class="answer-box-container mb-4">
+                            </div>
+                            <button class="btn-secondary disabled mx-auto table" id="btn-vote"><span>INVIA</span></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="flex justify-center">
+            <img src="assets/img/participant/malesci-logo.png" class="malesci-logo" alt="Menarini logo" />
+        </footer>
+        
+    </body>
+</html>

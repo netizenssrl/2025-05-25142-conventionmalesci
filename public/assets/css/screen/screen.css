@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes bounce {
+    0%{ transform: scale(1);}
+    50%{ transform: scale(1.2); }
+    100%{ transform: scale(1); }
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+body{
+    @apply relative w-[1920px] h-[1080px] overflow-hidden font-eurostile;
+    background-image: url("../../img/screen/bg-main.jpg");
+}
+body:after{
+    content: "";
+    @apply absolute left-0 right-0 top-0 bottom-0 bg-no-repeat bg-center opacity-0 pointer-events-none z-50 transition-all bg-black bg-opacity-70 origin-center;
+    background-image: url("../../img/screen/tap-icon.png");
+    background-size: 80px auto;
+}
+body.muted:after{
+    @apply opacity-100 cursor-pointer;
+    pointer-events: all;
+    animation: bounce 1s infinite;
+    
+}
+.room-name{
+    @apply opacity-0;
+}
+body:not([room=""]) .room-name{
+    @apply opacity-100;
+}
+.app-section{
+    @apply hidden flex-col absolute inset-0 bg-cover bg-center bg-no-repeat;
+}
+#cover-section {
+    background-image: url("../../img/screen/bg-cover.jpg");
+    @apply flex;
+}
+#interactive-session-section{
+    background-image: url("../../img/screen/bg-interactive-session.jpg");
+}
+body[room="1"] #interactive-session-section{
+    background-image: url("../../img/screen/bg-interactive-session-room-1.jpg");
+}
+body[room="2"] #interactive-session-section{
+    background-image: url("../../img/screen/bg-interactive-session-room-2.jpg");
+}
+
+/* ###############################################################################
+################################# QUESTION #######################################
+############################################################################### */
+.timer-box{
+    @apply text-white border-white border-[3px] rounded-xl text-[42px] font-eurostileDemi font-normal py-5 px-6 transition-all leading-none opacity-100;
+    transition: all .3s ease-in-out;
+}
+.timer-box.finished{
+    @apply border-primary;
+}
+.timer-box.finished p,
+.timer-box.finished span{
+    @apply text-primary;
+}
+.timer-box.finished span{
+    animation: blink ease-in-out 2s infinite;
+}
+.question-box-container{
+    @apply h-[260px] py-6 px-12 border-4 border-white rounded-3xl; 
+}
+.answer-box-container{
+    @apply flex flex-row flex-wrap gap-y-10;
+}
+.answer-choice{
+    @apply w-1/2 pr-20;
+}
+.answer-choice-inner{
+    @apply relative flex bg-primary rounded-3xl items-center;
+}
+.answer-letter{
+    @apply text-white text-5xl font-bold px-4;
+}
+.answer-text-box{
+    @apply bg-white text-secondary rounded-3xl text-[29px] font-eurostileDemi h-[190px] ps-5 pr-16 py-8 flex flex-1 items-center leading-[1.2];
+    transition: all .3s ease-in-out;
+}
+.percentage-ring-container{
+    @apply absolute table my-auto top-0 bottom-0 -right-[50px] bg-white rounded-full w-[104px] h-[104px] p-2 opacity-0;
+    transition: opacity .3s ease-in-out
+}
+.percentage-ring{
+    @apply relative bg-grey rounded-full w-full h-full block p-2;
+}
+.percentage-ring-fill{
+    @apply absolute top-0 left-0 right-0 bottom-0 rounded-full block bg-grey;
+    background: conic-gradient(#ef454d calc(75 * 360 / 100)deg, transparent 0deg 360deg);
+}
+.percentage-ring-container .percentage{
+    @apply relative text-primary bg-white rounded-full font-eurostileBoldCondensed text-[25px] w-full h-full flex items-center justify-center;
+}
+
+/* ###############################################################################
+################################ CORRECT ANSWERS #################################
+############################################################################### */
+#question-section.correct-answers .answer-choice[bCorrect="true"] .answer-text-box{
+    @apply text-white bg-primary;
+}
+#question-section.correct-answers.animate .answer-choice[bCorrect="true"] .answer-text-box{
+    animation: blink ease-in-out 1s forwards 2;
+}
+#question-section.correct-answers .timer-box{
+    @apply opacity-0;
+}
+
+/* ###############################################################################
+################################# RESULTS ########################################
+############################################################################### */
+#question-section.results .percentage-ring-container{
+    @apply opacity-100;
+}
+
+/* ###############################################################################
+################################ RANKING  ########################################
+############################################################################### */
+
+#ranking-section .ranking-container{
+    @apply rounded-3xl border-4 border-white text-white gap-0 mb-40;
+}
+#ranking-section.partial-teams .ranking-container{
+    @apply py-8 columns-2 mx-10 px-14;
+}
+#ranking-section.partial-rooms .ranking-container,
+#ranking-section.final-rooms .ranking-container {
+    @apply mx-60 px-14;
+}
+#ranking-section.final-teams .ranking-container,
+#ranking-section.final-rooms .ranking-container {
+    @apply py-8 flex flex-row;
+}
+#ranking-section.final-teams .ranking-container{
+    @apply mx-10;
+}
+
+
+#ranking-section .ranking-container .ranking-element{
+    @apply flex border-white;
+}
+#ranking-section.partial-teams .ranking-container .ranking-element,
+#ranking-section.partial-rooms .ranking-container .ranking-element{
+    @apply border-b-2;
+}
+#ranking-section.partial-teams .ranking-container .ranking-element{
+    @apply py-6 gap-6 text-4xl;
+}
+#ranking-section.final-teams .ranking-container .ranking-element,
+#ranking-section.final-rooms .ranking-container .ranking-element {
+    @apply flex-1 text-4xl flex-col items-center;
+}
+#ranking-section.partial-teams .ranking-container .ranking-element:nth-child(-n+5){
+    @apply pr-14;
+}
+#ranking-section.partial-teams .ranking-container .ranking-element:nth-child(5n), 
+#ranking-section.partial-rooms .ranking-container .ranking-element:last-child{
+    @apply border-0;
+}
+#ranking-section.partial-rooms .ranking-container .ranking-element{
+    @apply justify-center py-20 text-6xl;
+}
+#ranking-section.final-teams .ranking-container .ranking-element:first-child{
+    @apply order-2 border-x-2;
+}
+#ranking-section.final-rooms .ranking-container .ranking-element:first-child{
+    @apply border-r-2;
+}
+#ranking-section.final-teams .ranking-container .ranking-element:first-child .team-position,
+#ranking-section.final-rooms .ranking-container .ranking-element:first-child .team-position{
+    @apply bg-gold;
+}
+#ranking-section.final-teams .ranking-container .ranking-element:nth-child(2n){
+    @apply order-1 pt-24;
+}
+#ranking-section.final-teams .ranking-container .ranking-element:nth-child(2n) .team-position,
+#ranking-section.final-rooms .ranking-container .ranking-element:nth-child(2n) .team-position{
+    @apply bg-silver
+}
+#ranking-section.final-teams .ranking-container .ranking-element:last-child{
+    @apply order-3 pt-24;
+}
+#ranking-section.final-teams .ranking-container .ranking-element:last-child .team-position{
+    @apply bg-bronze;
+}
+
+#ranking-section .ranking-container .ranking-element .team-position {
+    @apply text-white;
+}
+#ranking-section.final-teams .ranking-container .ranking-element .team-position,
+#ranking-section.final-rooms .ranking-container .ranking-element .team-position {
+    @apply w-[175px] h-[175px] leading-[175px] text-5xl text-center rounded-full bg-center bg-no-repeat mb-8;
+    background-image: url("../../img/screen/icon-ranking.png");
+    background-size: 75% auto;
+}
+#ranking-section.partial-rooms .ranking-container .ranking-element .team-position,
+#ranking-section.final-teams .ranking-container .ranking-element .team-position {
+    @apply font-eurostileDemi;
+}
+#ranking-section.partial-teams .ranking-container .ranking-element:nth-child(n+6) .team-position{
+    @apply min-w-[55px] text-right;
+}
+
+#ranking-section.partial-teams .ranking-element p,
+#ranking-section.final-teams .ranking-element p,
+#ranking-section.final-rooms .ranking-element p{
+    @apply font-bold opacity-0;
+    transition: all .3s ease-in-out;
+}
+#ranking-section.partial-rooms .ranking-element p{
+    @apply font-eurostileDemi pl-6 opacity-0;
+    transition: all .3s ease-in-out;
+}
+#ranking-section.final-teams .ranking-element p,
+#ranking-section.final-rooms .ranking-element p {
+    @apply mb-3;
+}
+#ranking-section.partial-teams .team-score{
+    @apply ml-auto;
+}
+#ranking-section.final-teams .team-score,
+#ranking-section.final-rooms .team-score{
+    @apply text-5xl;
+}
+#ranking-section.partial-teams .ranking-container .ranking-element.animate p,
+#ranking-section.partial-rooms .ranking-container .ranking-element.animate p,
+#ranking-section.final-teams .ranking-container .ranking-element.animate p,
+#ranking-section.final-rooms .ranking-container .ranking-element.animate p{
+    @apply opacity-100;
+}
+#ranking-section.final-teams .ranking-container .ranking-element.animate .team-position,
+#ranking-section.final-rooms .ranking-container .ranking-element.animate .team-position{
+    animation: bounce ease-in-out 1s forwards;
+}

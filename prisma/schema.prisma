@@ -1,0 +1,177 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Participant {
+    id                 Int                 @id @default(autoincrement())
+    idSocket           String?
+    sEmail             String?             @unique
+    sFirstName         String?
+    sLastName          String?
+    dtmLogin           DateTime?
+    dtmLogout          DateTime?
+    dtmConnected       DateTime?
+    dtmDisconnected    DateTime?
+    dtmSurveyOpened    DateTime?
+    teamId             Int?
+    bTeamPointsEnabled Boolean             @default(true)
+    bRoomPointsEnabled Boolean             @default(true)
+    team               Team?               @relation(fields: [teamId], references: [id])
+    roomId             Int?
+    room               Room?               @relation(fields: [roomId], references: [id])
+    tweets             Tweet[]
+    participants       participantAnswer[]
+
+    @@map("participants")
+}
+
+model Team {
+    id           Int           @id @default(autoincrement())
+    sName        String
+    iScore       Int           @default(0)
+    sColor       String?
+    participants Participant[]
+
+    @@map("teams")
+}
+
+model Room {
+    id            Int            @id @default(autoincrement())
+    sName         String
+    iScore        Int            @default(0)
+    statusRooms   StatusRooms[]
+    participants  Participant[]
+    roomQuestions RoomQuestion[]
+
+    @@map("rooms")
+}
+
+model Tweet {
+    id            Int          @id @default(autoincrement())
+    sTextOriginal String
+    sTextEdited   String?
+    bApproved     Boolean      @default(false)
+    bArchived     Boolean      @default(false)
+    bOnScreen     Boolean      @default(false)
+    dtmCreated    DateTime
+    dtmApproved   DateTime?
+    dtmArchived   DateTime?
+    dtmOnScreen   DateTime?
+    participantId Int?
+    participant   Participant? @relation(fields: [participantId], references: [id])
+
+    @@map("tweets")
+}
+
+enum eQuestionType {
+    SINGLE_CHOICE
+    MULTIPLE_CHOICE
+    TEXT
+}
+
+model Question {
+    id             Int             @id @default(autoincrement())
+    sText          String          @db.Text
+    iMaxChoice     Int             @default(1)
+    iScore         Int
+    iTimerSeconds  Int
+    iDefaultOrder  Int?
+    iFrontEndOrder Int?
+    eType          eQuestionType
+    sSessionNotes  String?         @db.Text
+    sFooterNotes   String?         @db.Text
+    answers        Answer[]
+    votingSessions VotingSession[]
+    roomQuestions  RoomQuestion[]
+    statuses       Status[]
+
+    @@map("questions")
+}
+
+model Answer {
+    id                 Int      @id @default(autoincrement())
+    sText              String   @db.VarChar(255)
+    bCorrect           Boolean  @default(false)
+    iOrder             Int
+    sLetter            String   @db.VarChar(1)
+    sAdditionalClasses String?
+    questionId         Int
+    question           Question @relation(fields: [questionId], references: [id])
+    participantAnswers participantAnswer[]
+    @@map("answers")
+}
+
+model VotingSession {
+    id                 Int                 @id @default(autoincrement())
+    questionId         Int
+    question           Question            @relation(fields: [questionId], references: [id])
+    dtmStarted         DateTime
+    dtmStopped         DateTime?
+    participantAnswers participantAnswer[]
+    statuses           Status[]
+
+    @@map("voting_sessions")
+}
+
+model participantAnswer {
+    participantId   Int
+    votingSessionId Int
+    answerId        Int
+    dtmVoted        DateTime
+    participant     Participant   @relation(fields: [participantId], references: [id])
+    votingSession   VotingSession @relation(fields: [votingSessionId], references: [id])
+    answer          Answer        @relation(fields: [answerId], references: [id])
+
+    @@id([participantId, votingSessionId])
+    @@map("participant_answers")
+}
+
+model Status {
+    id                        Int            @id @default(autoincrement())
+    sActiveCommandScreen      String?
+    sActiveCommandParticipant String?
+    statusRooms               StatusRooms[]
+    dtmCreated                DateTime
+    bQRCodeEnabled            Boolean        @default(false)
+    bTweetEnabled             Boolean        @default(false)
+    sSurveyLink               String?
+    currentVotingSessionId    Int?
+    currentVotingSession      VotingSession? @relation(fields: [currentVotingSessionId], references: [id])
+    currentQuestionId         Int?
+    currentQuestion           Question?      @relation(fields: [currentQuestionId], references: [id])
+    iScore                    Int?
+    iTimerSeconds             Int?
+
+    @@map("status")
+}
+
+model StatusRooms {
+    statusId Int
+    roomId   Int
+    status   Status @relation(fields: [statusId], references: [id])
+    room     Room   @relation(fields: [roomId], references: [id])
+
+    @@id([statusId, roomId])
+    @@map("status_rooms")
+}
+
+model RoomQuestion {
+    roomId     Int
+    questionId Int
+    room       Room     @relation(fields: [roomId], references: [id])
+    question   Question @relation(fields: [questionId], references: [id])
+
+    @@id([roomId, questionId])
+    @@map("room_questions")
+}

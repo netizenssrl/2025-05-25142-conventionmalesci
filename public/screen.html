@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+        <meta name="apple-mobile-web-app-title" content="Screen | Connessi al futuro">
+
+        <link rel="stylesheet" href="assets/fonts/fonts.css">
+        <link rel="stylesheet" href="assets/css/screen/screen.min.css">
+        <script src="assets/js/socket.io.min.js"></script>
+        <script src="assets/js/easytimer.min.js"></script>
+        <script src="assets/js/jquery-3.7.1.min.js"></script>
+        <script src="assets/js/axios/axios.min.js"></script>
+        <script src="assets/js/screen.js"></script>
+
+        <title>Screen | Connessi al futuro</title>
+    </head>
+
+    <body room="" class="muted">
+        <section class="app-section" id="cover-section">
+        </section>
+        <section class="app-section" id="interactive-session-section">
+        </section>
+        <section class="app-section" id="question-section">
+            <div class="container">
+                <header class="flex items-center justify-between pt-10">
+                    <div class="flex-1"></div>
+                    <div class="flex-1">
+                        <img src="assets/img/screen/main-logo.png" class="max-w-[1050px] h-auto" />
+                    </div>
+                    <div class="flex-1 justify-end flex">
+                        <div class="timer-box">
+                            <p>
+                                <span class="minutes">00</span>.<span class="seconds">00</span>
+                            </p>
+                        </div>
+                    </div>
+                </header>
+                <main>
+                    <p class="text-center text-4xl text-white font-eurostileEx2 font-bold mb-5 room-name uppercase"></p>
+                    <div class="qa-container">
+                        <div class="question-box-container flex flex-col mb-10">
+                            <p class="text-center question-text-number text-4xl text-white font-eurostileEx2 font-bold"></p>
+                            <p class="text-center question-text text-3xl text-white font-eurostileDemi my-auto"></p>
+                        </div>
+                        <div class="answer-box-container">
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
+        <section class="app-section final-rooms" id="ranking-section">
+            <header class="flex items-center justify-center pt-10">
+                <img src="assets/img/screen/main-logo.png" class="max-w-[1050px] h-auto" />
+            </header>
+            <main class="flex-auto flex items-center">
+                <div class="container">
+                    <p class="text-white text-6xl text-center font-eurostileEx2 font-bold mb-12 ranking-title"></p>
+                    <div class="ranking-container">
+                    </div>
+                </div>
+            </main>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+*{
+    @apply touch-pan-x touch-pan-y;
+}
+body{
+    @apply relative bg-cover bg-center bg-no-repeat h-dvh bg-secondary flex flex-col overflow-hidden;
+    background-image: url("../../img/moderator/bg-main.png");
+}
+.app-section{
+    @apply absolute h-full flex-col w-full overflow-y-auto;
+}
+main{
+    @apply flex-1 relative overflow-y-auto pb-6;
+}
+.tweets-container{
+    @apply px-6 max-w-[1000px] mx-auto;
+}
+.no-tweets-text{
+    @apply text-white text-center text-2xl font-eurostileDemi;
+}
+.tweet{
+    @apply relative bg-white rounded-lg p-4 text-secondary text-lg mb-4 text-center leading-tight font-eurostileDemi;
+}
+.tweet.animate{
+    animation: blink ease-in-out 1.5s forwards 2;
+}
+.approval-date{
+    @apply absolute text-sm top-2 right-2;
+}

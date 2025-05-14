@@ -1,0 +1,21 @@
+{
+  "name": "connessialfuturo",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "dev:moderator": "npx tailwindcss -i ./assets/css/moderator/moderator.css -o ./assets/css/moderator/moderator.min.css --minify --watch",
+    "dev:participant": "npx tailwindcss -i ./assets/css/participant/participant.css -o ./assets/css/participant/participant.min.css --minify --watch",
+    "dev:screen": "npx tailwindcss -i ./assets/css/screen/screen.css -o ./assets/css/screen/screen.min.css --minify --watch",
+    "dev": "concurrently \"npm run dev:moderator\" \"npm run dev:participant\" \"npm run dev:screen\"",
+    "build:moderator": "npx tailwindcss -i ./assets/css/moderator/moderator.css -o ./assets/css/moderator/moderator.min.css --minify",
+    "build:participant": "npx tailwindcss -i ./assets/css/participant/participant.css -o ./assets/css/participant/participant.min.css --minify",
+    "build:screen": "npx tailwindcss -i ./assets/css/screen/screen.css -o ./assets/css/screen/screen.min.css --minify",
+    "build": "npm run build:moderator && npm run build:participant && npm run build:screen"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.16"
+  }
+}

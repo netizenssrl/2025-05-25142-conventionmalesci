@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@keyframes bounce {
+    0%{ transform: scale(1);}
+    50%{ transform: scale(1.2); }
+    100%{ transform: scale(1); }
+}
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+*{
+    @apply touch-pan-x touch-pan-y;
+}
+body{
+    @apply relative bg-cover bg-center bg-no-repeat h-dvh bg-secondary flex flex-col overflow-hidden;
+    background-image: url("../../img/participant/bg-main.jpg");
+}
+p, input, button, a{
+    @apply font-eurostile select-none;
+}
+/* #############################################################################
+################################# HEADER #######################################
+############################################################################# */
+header{
+    @apply relative h-[7%] transition-all;
+}
+header.sticky{
+    @apply h-[6%];
+}
+#profile-btn{
+    @apply bg-no-repeat bg-center w-[30px] h-[30px] bg-contain relative opacity-70;
+    background-image: url("../../img/participant/user-icon.png");
+}
+.profile-menu-container{
+    @apply hidden relative z-10 pr-3 items-center gap-2;
+}
+.profile-email{
+    @apply text-white text-[0.6rem] inline-block;
+}
+#logout-btn{
+    @apply hidden absolute top-[100%] mt-2 right-3 text-white py-1 ps-4 pr-6 bg-secondary bg-no-repeat rounded-lg;
+    background-size: 14px auto;
+    background-position: calc(100% - 4px) 50%;
+    background-image: url("../../img/participant/logout-icon.png");
+}
+body.logged-in header .profile-menu-container{
+    @apply flex;
+}
+
+footer{
+    @apply relative h-[10%];
+}
+main{
+    @apply flex-1 relative;
+}
+
+.app-section{
+    @apply hidden absolute h-full flex-col w-full overflow-y-auto;
+}
+.malesci-logo{
+    @apply h-full w-auto;
+}
+.main-logo{
+    @apply max-w-[50%] mx-auto mb-6;
+}
+.logo-box.question .main-logo{
+    @apply max-w-[20%];
+}
+.text-logo{
+    @apply text-primary text-center font-eurostile font-bold text-[4.5vw] lg:text-2xl mb-4;
+}
+.logo-box.question .text-logo{
+    @apply text-[3vw] lg:text-xl;
+}
+.btn-primary{
+    @apply bg-primary font-bold font-eurostileEx2 text-white rounded-lg text-xl md:text-3xl py-3 px-4;
+}
+.btn-primary.disabled, .btn-secondary.disabled{
+    @apply opacity-50 pointer-events-none;
+}
+.btn-secondary{
+    @apply bg-primary font-eurostileDemi text-primary rounded-lg text-xl md:text-3xl py-3 px-12 relative;
+}
+.btn-secondary>span{
+    @apply relative;
+}
+.btn-secondary:before{
+    content: "";
+    @apply absolute bg-white rounded-lg top-[15%] left-0 right-0 bottom-0;
+}
+.error-text{
+    @apply hidden text-sm text-primary;
+}
+
+/* #############################################################################
+######################## MODAL PROGRAMMA & TWEETS ##############################
+############################################################################# */
+.modal{
+    @apply hidden fixed z-40 top-0 left-0 w-full h-full bg-black bg-opacity-50;
+}
+.modal-content{
+    @apply relative lg:container;
+    width: calc(100% - 60px);
+    height: calc(100% - 90px);
+}
+.modal-scroller{
+    @apply w-full h-full overflow-y-auto rounded-lg;
+}
+.tweets-container-outer{
+    @apply hidden absolute top-0 left-0 right-0 bottom-0 flex-col px-3 py-8;
+}
+.tweets-container{
+    @apply bg-white rounded-lg h-full overflow-y-auto;
+}
+.tweets-container .tweet{
+    @apply border-b-[1px] border-solid border-secondary py-3 text-secondary leading-[1.1] font-eurostileDemi text-sm;
+}
+.tweets-container .tweet:last-child{
+    @apply border-0;
+}
+.modal-close-btn{
+    @apply absolute bg-white rounded-lg -top-[10px] -right-[10px] w-[35px] h-[35px] bg-center bg-no-repeat;
+    background-image: url("../../img/participant/close-icon.png");
+    background-size: auto 16px;
+    box-shadow: 2px 3px 4px rgba(0,0,0,0.5);
+}
+.modal-back-btn{
+    @apply absolute text-secondary bg-white rounded-lg -top-[10px] -left-[10px] pl-6 pr-3 bg-no-repeat font-eurostileDemi leading-[35px];
+    background-image: url("../../img/participant/arrow-left-icon.png");
+    background-size: auto 16px;
+    background-position: 6px 50%;
+    box-shadow: 2px 3px 4px rgba(0,0,0,0.5);
+}
+#btn-open-new-tweet{
+    @apply text-sm md:text-xl;
+}
+#tweet-textarea{
+    @apply w-full rounded-lg p-3 text-secondary leading-[1.1] font-eurostileDemi text-sm outline-none border-[1px] border-transparent transition-colors;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+#tweet-textarea:focus{
+    @apply outline-none border-secondary;
+}
+#btn-send-new-tweet{
+    @apply min-w-[75%];
+}
+
+/* ###############################################################################
+################################# QUESTION #######################################
+############################################################################### */
+.qa-container{
+    @apply flex-1 overflow-auto pb-4;
+}
+.team-box{
+    @apply border-white border-[1px] rounded-md p-2 leading-tight text-xs;
+}
+.timer-box{
+    @apply text-white bg-primary rounded-md p-3 transition-all leading-none opacity-100 flex justify-center items-center;
+    transition: all .3s ease-in-out;
+}
+.timer-box *{
+    @apply font-eurostileDemi;
+}
+.timer-box.finished{
+    @apply border-primary;
+}
+.timer-box.finished p,
+.timer-box.finished span{
+    @apply text-primary;
+}
+.timer-box.finished span{
+    animation: blink ease-in-out 2s infinite;
+}
+.question-box-container{
+    @apply py-2 px-4 bg-primary rounded-lg; 
+}
+.answer-box-container{
+    @apply flex flex-col gap-4;
+}
+.answer-choice-inner{
+    @apply relative flex bg-primary rounded-lg items-center ;
+}
+.answer-letter{
+    @apply text-white text-2xl font-bold px-2;
+}
+.answer-text-box{
+    @apply bg-white text-secondary rounded-lg font-eurostile font-bold min-h-[80px] px-2 py-4 flex flex-1 items-center leading-[1.15] border-transparent border-4 transition-all;
+}
+.answer-choice.selected .answer-text-box{
+    @apply border-primary bg-opacity-70;
+}
+
+/* ###############################################################################
+################################ CORRECT ANSWERS #################################
+############################################################################### */
+#question-section.correct-answers .answer-choice[bCorrect="true"] .answer-text-box{
+    @apply text-white bg-primary;
+}
+#question-section.correct-answers .timer-box{
+    @apply opacity-0;
+}

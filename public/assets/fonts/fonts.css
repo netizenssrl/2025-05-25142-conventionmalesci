@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Eurostile LT Std';
+    src: url('EurostileLTStd.woff2') format('woff2'),
+        url('EurostileLTStd.woff') format('woff'),
+        url('EurostileLTStd.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Eurostile LT Std';
+    src: url('EurostileLTStd-BoldOblique.woff2') format('woff2'),
+        url('EurostileLTStd-BoldOblique.woff') format('woff'),
+        url('EurostileLTStd-BoldOblique.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Eurostile LT Std Ex2';
+    src: url('EurostileLTStd-BoldEx2.woff2') format('woff2'),
+        url('EurostileLTStd-BoldEx2.woff') format('woff'),
+        url('EurostileLTStd-BoldEx2.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Eurostile LT Std';
+    src: url('EurostileLTStd-Bold.woff2') format('woff2'),
+        url('EurostileLTStd-Bold.woff') format('woff'),
+        url('EurostileLTStd-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Eurostile LT Std Ex2';
+    src: url('EurostileLTStd-Ex2.woff2') format('woff2'),
+        url('EurostileLTStd-Ex2.woff') format('woff'),
+        url('EurostileLTStd-Ex2.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Eurostile LT Std';
+    src: url('EurostileLTStd-Oblique.woff2') format('woff2'),
+        url('EurostileLTStd-Oblique.woff') format('woff'),
+        url('EurostileLTStd-Oblique.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Eurostile LT Std Demi';
+    src: url('EurostileLTStd-Demi.woff2') format('woff2'),
+        url('EurostileLTStd-Demi.woff') format('woff'),
+        url('EurostileLTStd-Demi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Eurostile LT Std Bold Condensed';
+    src: url('EurostileLTStd-BoldCn.woff2') format('woff2'),
+        url('EurostileLTStd-BoldCn.woff') format('woff'),
+        url('EurostileLTStd-BoldCn.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
