@@ -1,5 +1,5 @@
 export const metadata = {
-    title: "Tweets | Connessi al futuro",
+    title: "Tweets | Convention Malesci 2025",
     robots: "noindex, nofollow",
 };
 

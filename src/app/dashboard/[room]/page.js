@@ -1,5 +1,5 @@
 export const metadata = {
-    title: "Dashboard | Connessi al futuro",
+    title: "Dashboard | Convention Malesci 2025",
     robots: "noindex, nofollow",
 };
 

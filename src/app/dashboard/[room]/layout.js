@@ -19,7 +19,7 @@ import { getTeams } from "@/actions/team";
 import "@/styles/main.scss";
 
 export const metadata = {
-    title: "Connessi al futuro",
+    title: "Convention Malesci 2025",
     robots: "noindex, nofollow",
 };
 export const dynamic = "force-dynamic";
